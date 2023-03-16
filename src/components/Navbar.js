@@ -1,24 +1,7 @@
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
-import ItemContext from "../context/ItemContext";
-
-const navVarient = {
-  hide: {
-    y: ["-100vh"],
-  },
-  show: {
-    y: 0,
-    transition: {
-      delay: 0.2,
-      type: "spring",
-      stiffness: 80,
-      mass: 0.4,
-      when: "beforeChildren",
-      staggerChildren: 0.4,
-    },
-  },
-};
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 const childVarient = {
   hide: {
@@ -35,61 +18,45 @@ const childVarient = {
 };
 
 function Navbar() {
-  const { active, setActive } = useContext(ItemContext);
+  const location = useLocation();
+  const totalItems = useSelector((state) => state.cart.totalQuantity);
 
-  const listItems = [
-    {
-      id: 1,
-      name: "HOME",
-      link: "/",
-      handleClick: (link) => {
-        setActive(link);
-      },
-    },
-    {
-      id: 2,
-      name: "CART",
-      link: "/cart",
-      handleClick: (link) => {
-        setActive(link);
-      },
-    },
-  ];
+  const [active, setActive] = useState(location.pathname);
+
+  useEffect(() => {
+    setActive(location.pathname);
+  }, [location]);
 
   return (
-    <motion.nav
-      className="sticky top-0 z-50 py-6 px-20 flex flex-row justify-between items-center text-white dark:bg-slate-900"
-      variants={navVarient}
-      initial="hide"
-      animate="show"
-    >
-      <motion.h1 className="font-extrabold text-2xl" variants={childVarient}>
+    <nav className="sticky top-0 right-0 z-20 py-6 px-20 flex flex-row justify-between items-center text-white bg-slate-900">
+      <motion.h1 className="font-extrabold text-2xl" {...childVarient}>
         Shopping App
       </motion.h1>
 
-      <ul className="font-bold hover: flex flex-row justify-center items-center gap-6">
-        {listItems.map((item) => {
-          return (
-            <Link
-              to={item.link}
-              key={item.id}
-              onClick={() => item.handleClick(item.link)}
-            >
-              <li
-                className={`py-2 border-solid border-b-2 transition-all ease-in-out duration-300 cursor-pointer
-              ${
-                active === item.link
-                  ? "text-white border-white"
-                  : "text-gray-500 border-transparent"
-              }`}
-              >
-                {item.name}
-              </li>
-            </Link>
-          );
-        })}
-      </ul>
-    </motion.nav>
+      <div className="relative font-bold hover: flex flex-row justify-center items-center gap-6">
+        <Link to="/">
+          <div
+            className={`text-white py-2 border-solid border-b-2 transition-all ease-in-out duration-300 cursor-pointer
+              ${active === "/" ? "border-white" : "border-transparent"}`}
+          >
+            <p>HOME</p>
+          </div>
+        </Link>
+        <Link to="/cart">
+          <div
+            className={`text-white py-2 border-solid border-b-2 transition-all ease-in-out duration-300 cursor-pointer
+              ${active === "/cart" ? "border-white" : "border-transparent"}`}
+          >
+            <p>CART</p>
+            {totalItems > 0 && (
+              <div className="absolute -top-0 -right-6 w-5 h-5 rounded-full bg-white bg-opacity-90 text-slate-900 flex justify-center items-center text- text-xm">
+                {totalItems}
+              </div>
+            )}
+          </div>
+        </Link>
+      </div>
+    </nav>
   );
 }
 

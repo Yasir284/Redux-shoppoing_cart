@@ -1,6 +1,3 @@
-import { useContext } from "react";
-import ItemContext from "../context/ItemContext";
-import { ADD_ITEM } from "../context/action.type";
 import { motion } from "framer-motion";
 
 import Card from "./Card";
@@ -26,33 +23,28 @@ const containerVarient = {
   },
 };
 
-function BuyPage() {
-  const { dispatch, products } = useContext(ItemContext);
-
+function BuyPage({ products }) {
   return (
-    <div className="text-gray-600 body-font container px-5 py-24 mx-auto">
+    <div className="text-gray-600 body-font container py-12 mx-auto">
       <motion.div
-        className="flex flex-row flex-wrap justify-center items-center gap-8 -m-4 text-center"
+        className="flex flex-row flex-wrap justify-center items-center gap-8 text-center"
         variants={containerVarient}
         initial="hide"
         animate="show"
         exit="exit"
       >
-        {products.map((product) => (
-          <Card
-            key={product.id}
-            img={product.smallImage}
-            name={product.productName}
-            price={product.productPrice}
-            description={product.productDescription}
-            addItem={() => {
-              debugger;
-              return dispatch({
-                type: ADD_ITEM,
-                payload: product,
-              });
-            }}
-          />
+        {products?.map((product) => (
+          <div className="basis-1/4" key={product.id}>
+            <Card
+              id={product.id}
+              smallImage={product.smallImage}
+              tinyImage={product.tinyImage}
+              name={product.productName}
+              price={product.productPrice}
+              productColor={product.productColor}
+              description={product.productDescription}
+            />
+          </div>
         ))}
       </motion.div>
     </div>

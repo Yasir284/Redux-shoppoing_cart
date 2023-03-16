@@ -1,4 +1,7 @@
 import { motion } from "framer-motion";
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+import { cartActions } from "../store/cart.slice";
 
 const btnVarient = {
   initial: {
@@ -8,7 +11,7 @@ const btnVarient = {
     color: "#0f172a",
   },
   whileHover: {
-    scale: 1.2,
+    scale: 1.1,
     backgroundColor: "#0f172a",
     border: "2px solid #fff",
     color: "#fff",
@@ -17,7 +20,7 @@ const btnVarient = {
     },
   },
   whileTap: {
-    scale: 0.6,
+    scale: 0.9,
     transition: {
       type: "spring",
       stiffness: 200,
@@ -31,24 +34,40 @@ const containerVarient = {
   },
   whileHover: {
     scale: 1.1,
-    transition: {
-      type: "spring",
-      stiffness: 700,
-    },
   },
 };
 
-function Card({ img, name, price, addItem, description }) {
+function Card({
+  id,
+  smallImage,
+  name,
+  price,
+  description,
+  tinyImage,
+  productColor,
+}) {
+  const dispatch = useDispatch();
+  const addItem = () => {
+    try {
+      dispatch(
+        cartActions.addItem({ id, name, price, tinyImage, productColor })
+      );
+      toast("Item added to cart", { type: "success" });
+    } catch {
+      toast("Failed to add item in the cart", { type: "error" });
+    }
+  };
+
   return (
     <motion.div
-      className="bg-slate-900 rounded-md shadow-xl shadow-[#111111] lg:w-1/4 md:w-1/2 p-4 w-full"
+      className="bg-slate-900 rounded-md shadow-xl shadow-[#111111] p-4 w-full"
       {...containerVarient}
     >
       <div className="block relative h-48 rounded overflow-hidden">
         <img
           alt="ecommerce"
           className="object-cover object-center w-full h-full block"
-          src={img}
+          src={smallImage}
         />
       </div>
       <div className="text-gray-300 flex flex-row justify-between items-center my-6">
