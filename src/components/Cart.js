@@ -73,11 +73,11 @@ function Cart() {
   return (
     <motion.div
       {...containerVarient}
-      className="mx-auto my-10 rounded-md max-w-3xl p-6 sm:p-10 bg-gray-900 text-gray-100 shadow-lg
-    shadow-[#111111] overflow-y-visible"
+      className="mx-auto mt-10 rounded-md max-w-3xl p-6 sm:p-10 bg-gray-900 text-gray-100 shadow-lg
+    shadow-[#111111]"
     >
       <h2 className="text-xl font-semibold">Your cart</h2>
-      <ul className="flex flex-col divide-y h-[50vh] divide-gray-700 overflow-y-visible customScrollbar">
+      <ul className="flex flex-col divide-y h-[50vh] divide-gray-700 overflow-y-scroll px-6 customScrollbar">
         {cartItem.length > 0 ? (
           cartItem?.map((item) => {
             return (
