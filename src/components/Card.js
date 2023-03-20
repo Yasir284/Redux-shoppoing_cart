@@ -80,7 +80,7 @@ function Card({
         onClick={addItem}
         {...btnVarient}
       >
-        Buy now
+        Add to cart
       </motion.button>
     </motion.div>
   );
