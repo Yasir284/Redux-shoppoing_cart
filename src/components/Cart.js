@@ -70,6 +70,15 @@ function Cart() {
     dispatch(cartActions.removeItem({ id }));
   };
 
+  const buyProduct = () => {
+    try {
+      dispatch(cartActions.butProduct());
+      toast("Payment successful", { type: "success" });
+    } catch {
+      toast("Failed to buy the product", { type: "error" });
+    }
+  };
+
   return (
     <motion.div
       {...containerVarient}
@@ -159,6 +168,7 @@ function Cart() {
         </Link>
         {cartItem.length > 0 ? (
           <motion.button
+            onClick={buyProduct}
             {...btnVarient}
             className="px-6 py-2 rounded-md bg-violet-400 text-gray-900 border-violet-400"
           >

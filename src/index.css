@@ -15,27 +15,31 @@ body {
 }
 
 body::-webkit-scrollbar {
-  width: 10px;
+  width: 6px;
 }
 
 body::-webkit-scrollbar-track {
-  background: transparent;
+  background: rgba(255, 255, 255, 0.42);
+  border-radius: 10px;
 }
 
 body::-webkit-scrollbar-thumb {
-  background-color: #0f172a;
+  border-radius: 10px;
+  background-color: #fff;
 }
 /*  */
 .customScrollbar::-webkit-scrollbar {
-  width: 10px;
+  width: 6px;
 }
 
 .customScrollbar::-webkit-scrollbar-track {
-  background: transparent;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.42);
 }
 
 .customScrollbar::-webkit-scrollbar-thumb {
   background-color: #fff;
+  border-radius: 10px;
 }
 
 code {

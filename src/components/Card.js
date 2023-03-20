@@ -60,7 +60,7 @@ function Card({
 
   return (
     <motion.div
-      className="bg-slate-900 rounded-md shadow-xl shadow-[#111111] p-4 w-full"
+      className="bg-slate-900 rounded-md shadow-xl shadow-[#111111] p-4 w-80"
       {...containerVarient}
     >
       <div className="block relative h-48 rounded overflow-hidden">

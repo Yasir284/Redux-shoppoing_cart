@@ -34,17 +34,16 @@ function BuyPage({ products }) {
         exit="exit"
       >
         {products?.map((product) => (
-          <div className="basis-1/4" key={product.id}>
-            <Card
-              id={product.id}
-              smallImage={product.smallImage}
-              tinyImage={product.tinyImage}
-              name={product.productName}
-              price={product.productPrice}
-              productColor={product.productColor}
-              description={product.productDescription}
-            />
-          </div>
+          <Card
+            key={product.id}
+            id={product.id}
+            smallImage={product.smallImage}
+            tinyImage={product.tinyImage}
+            name={product.productName}
+            price={product.productPrice}
+            productColor={product.productColor}
+            description={product.productDescription}
+          />
         ))}
       </motion.div>
     </div>
