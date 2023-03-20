@@ -50,20 +50,20 @@ function Cart() {
     );
   };
 
-  const addItem = (id) => {
+  const increaseItem = (id) => {
     try {
-      dispatch(cartActions.addItem({ id }));
+      dispatch(cartActions.increaseItem({ id }));
     } catch {
       toast("Failed to add item in the cart", { type: "error" });
     }
   };
 
-  const removeItem = (id) => {
-    dispatch(cartActions.removeItem({ id }));
+  const decreaseItem = (id) => {
+    dispatch(cartActions.decreaseItem({ id }));
   };
 
-  const removeProduct = (id) => {
-    dispatch(cartActions.removeProduct({ id }));
+  const removeItem = (id) => {
+    dispatch(cartActions.removeItem({ id }));
   };
 
   const buyProduct = () => {
@@ -127,7 +127,7 @@ function Cart() {
                     {/* Add and remove item button */}
                     <div className="flex flex-row justify-between">
                       <button
-                        onClick={() => removeProduct(item.id)}
+                        onClick={() => removeItem(item.id)}
                         className="flex gap-2 items-center text-red-600"
                       >
                         <RiDeleteBin6Line />
@@ -135,13 +135,13 @@ function Cart() {
                       </button>
 
                       <div className="flex text-sm flex-row gap-4">
-                        <button onClick={() => removeItem(item.id)}>
+                        <button onClick={() => decreaseItem(item.id)}>
                           <FaMinus />
                         </button>
                         <div className="rounded-sm w-10 text-center font-semibold bg-white text-slate-900">
                           {item.quantity}
                         </div>
-                        <button onClick={() => addItem(item.id)}>
+                        <button onClick={() => increaseItem(item.id)}>
                           <FaPlus />
                         </button>
                       </div>

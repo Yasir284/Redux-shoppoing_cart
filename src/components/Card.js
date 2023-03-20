@@ -50,7 +50,7 @@ function Card({
   const addItem = () => {
     try {
       dispatch(
-        cartActions.addItem({ id, name, price, tinyImage, productColor })
+        cartActions.increaseItem({ id, name, price, tinyImage, productColor })
       );
       toast("Item added to cart", { type: "success" });
     } catch {
