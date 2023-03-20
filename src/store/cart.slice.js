@@ -40,7 +40,6 @@ const cartSlice = createSlice({
         state.itemsList = state.itemsList.filter(
           (item) => item.id !== action.payload.id
         );
-        console.log(state.itemsList);
       } else {
         itemToRemove.totalPrice -= itemToRemove.price;
         itemToRemove.quantity--;
@@ -48,7 +47,17 @@ const cartSlice = createSlice({
       state.totalQuantity--;
     },
 
-    butProduct(state, action) {
+    removeProduct(state, action) {
+      state.totalQuantity -= state.itemsList.find(
+        (item) => item.id === action.payload.id
+      ).quantity;
+
+      state.itemsList = state.itemsList.filter(
+        (item) => item.id !== action.payload.id
+      );
+    },
+
+    butProduct(state) {
       state.itemsList = [];
       state.totalQuantity = 0;
     },

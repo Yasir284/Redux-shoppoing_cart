@@ -2,6 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { AiOutlineShopping, AiOutlineHome } from "react-icons/ai";
 
 const childVarient = {
   hide: {
@@ -36,20 +37,20 @@ function Navbar() {
       <div className="relative font-bold hover: flex flex-row justify-center items-center gap-6">
         <Link to="/">
           <div
-            className={`text-white py-2 border-solid border-b-2 transition-all ease-in-out duration-300 cursor-pointer
+            className={`text-white pb-1 border-solid border-b-2 transition-all ease-in-out duration-300 cursor-pointer
               ${active === "/" ? "border-white" : "border-transparent"}`}
           >
-            <p>HOME</p>
+            <AiOutlineHome size="1.8rem" />
           </div>
         </Link>
         <Link to="/cart">
           <div
-            className={`text-white py-2 border-solid border-b-2 transition-all ease-in-out duration-300 cursor-pointer
+            className={`text-white pb-1 border-solid border-b-2 transition-all ease-in-out duration-300 cursor-pointer
               ${active === "/cart" ? "border-white" : "border-transparent"}`}
           >
-            <p>CART</p>
+            <AiOutlineShopping size="1.8rem" />
             {totalItems > 0 && (
-              <div className="absolute -top-0 -right-6 w-5 h-5 rounded-full bg-white bg-opacity-90 text-slate-900 flex justify-center items-center text- text-xm">
+              <div className="absolute -top-2 -right-4 w-5 h-5 rounded-full bg-white text-slate-900 flex justify-center items-center text- text-xm">
                 {totalItems}
               </div>
             )}

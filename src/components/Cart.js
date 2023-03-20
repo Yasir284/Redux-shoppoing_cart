@@ -3,25 +3,18 @@ import { cartActions } from "../store/cart.slice";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FaArrowLeft, FaMinus, FaPlus } from "react-icons/fa";
+import { RiDeleteBin6Line } from "react-icons/ri";
 import { toast } from "react-toastify";
 
 const containerVarient = {
   initial: {
-    x: "100vw",
+    opacity: 0,
   },
   animate: {
-    x: 0,
-    transition: {
-      type: "spring",
-      stiffness: 80,
-      mass: 0.6,
-    },
+    opacity: 1,
   },
   exit: {
-    x: "100vw",
-    transition: {
-      ease: "easeOut",
-    },
+    opacity: 0,
   },
 };
 
@@ -70,6 +63,10 @@ function Cart() {
     dispatch(cartActions.removeItem({ id }));
   };
 
+  const removeProduct = (id) => {
+    dispatch(cartActions.removeProduct({ id }));
+  };
+
   const buyProduct = () => {
     try {
       dispatch(cartActions.butProduct());
@@ -82,11 +79,11 @@ function Cart() {
   return (
     <motion.div
       {...containerVarient}
-      className="mx-auto mt-10 rounded-md max-w-3xl p-6 sm:p-10 bg-gray-900 text-gray-100 shadow-lg
+      className="mx-auto mt-6 rounded-md max-w-3xl p-6 sm:p-10 bg-gray-900 text-gray-100 shadow-lg
     shadow-[#111111]"
     >
       <h2 className="text-xl font-semibold">Your cart</h2>
-      <ul className="flex flex-col divide-y h-[50vh] divide-gray-700 overflow-y-scroll px-6 customScrollbar">
+      <ul className="flex flex-col divide-y h-[50vh] divide-gray-700 overflow-y-auto px-6 customScrollbar">
         {cartItem.length > 0 ? (
           cartItem?.map((item) => {
             return (
@@ -104,7 +101,7 @@ function Cart() {
                     alt="img"
                   />
 
-                  <div className="flex flex-col justify-between w-full pb-4">
+                  <div className="flex flex-col justify-between w-full">
                     {/* Product info */}
                     <div className="flex justify-between w-full pb-2 space-x-2">
                       <div className="space-y-1">
@@ -129,16 +126,26 @@ function Cart() {
                     </div>
 
                     {/* Add and remove item button */}
-                    <div className="flex text-sm flex-row gap-4">
-                      <button onClick={() => removeItem(item.id)}>
-                        <FaMinus />
+                    <div className="flex flex-row justify-between">
+                      <button
+                        onClick={() => removeProduct(item.id)}
+                        className="flex gap-2 items-center text-red-600"
+                      >
+                        <RiDeleteBin6Line />
+                        <p>Remove</p>
                       </button>
-                      <div className="rounded-sm w-10 text-center font-semibold bg-white text-slate-900">
-                        {item.quantity}
+
+                      <div className="flex text-sm flex-row gap-4">
+                        <button onClick={() => removeItem(item.id)}>
+                          <FaMinus />
+                        </button>
+                        <div className="rounded-sm w-10 text-center font-semibold bg-white text-slate-900">
+                          {item.quantity}
+                        </div>
+                        <button onClick={() => addItem(item.id)}>
+                          <FaPlus />
+                        </button>
                       </div>
-                      <button onClick={() => addItem(item.id)}>
-                        <FaPlus />
-                      </button>
                     </div>
                   </div>
                 </div>
@@ -151,7 +158,8 @@ function Cart() {
           </p>
         )}
       </ul>
-      <div className="space-y-1 text-right">
+
+      <div className="mt-4 text-right">
         <p>
           Total amount : <span className="font-semibold">₹ {totalPrice()}</span>
         </p>
@@ -159,7 +167,8 @@ function Cart() {
           Not including taxes and shipping costs
         </p>
       </div>
-      <div className="flex justify-end items-center gap-6 space-x-4">
+
+      <div className="flex justify-end mt-4 items-center gap-6">
         <Link to="/">
           <FaArrowLeft
             type="button"
