@@ -52,7 +52,7 @@ function App() {
       <Navbar />
       <ToastContainer position="bottom-right" theme="dark" autoClose={2000} />
       <AnimatePresence mode="wait">
-        <Switch location={location} key={location.key}>
+        <Switch location={location} key={location.pathname}>
           <Route exact path="/">
             <BuyPage products={products} />
           </Route>

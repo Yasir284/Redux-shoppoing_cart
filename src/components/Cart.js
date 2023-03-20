@@ -53,7 +53,6 @@ function Cart() {
   const addItem = (id) => {
     try {
       dispatch(cartActions.addItem({ id }));
-      toast("Item added to cart", { type: "success" });
     } catch {
       toast("Failed to add item in the cart", { type: "error" });
     }
@@ -79,7 +78,7 @@ function Cart() {
   return (
     <motion.div
       {...containerVarient}
-      className="mx-auto mt-6 rounded-md max-w-3xl p-6 sm:p-10 bg-gray-900 text-gray-100 shadow-lg
+      className="mx-auto mt-4 rounded-md max-w-3xl p-6 sm:p-10 bg-gray-900 text-gray-100 shadow-lg
     shadow-[#111111]"
     >
       <h2 className="text-xl font-semibold">Your cart</h2>
