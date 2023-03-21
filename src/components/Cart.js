@@ -39,7 +39,7 @@ const btnVarient = {
 };
 
 function Cart() {
-  const cartItem = useSelector((state) => state.cart.itemsList);
+  const cartItem = useSelector((store) => store.cart.itemsList);
   const dispatch = useDispatch();
 
   const totalPrice = () => {

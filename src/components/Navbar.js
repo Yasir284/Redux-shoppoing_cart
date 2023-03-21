@@ -20,7 +20,7 @@ const childVarient = {
 
 function Navbar() {
   const location = useLocation();
-  const totalItems = useSelector((state) => state.cart.totalQuantity);
+  const totalItems = useSelector((store) => store.cart.totalQuantity);
 
   const [active, setActive] = useState(location.pathname);
 
