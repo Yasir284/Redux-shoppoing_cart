@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useSelector } from "react-redux";
 
 import Card from "./Card";
 
@@ -14,7 +15,8 @@ const containerVarient = {
   },
 };
 
-function BuyPage({ products }) {
+function BuyPage() {
+  const products = useSelector((store) => store.product);
   return (
     <div className="text-gray-600 body-font container py-12 mx-auto">
       <motion.div
