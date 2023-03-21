@@ -5,7 +5,7 @@ import Navbar from "./components/Navbar";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Switch, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 
 import { AnimatePresence } from "framer-motion";
 import { useDispatch } from "react-redux";
@@ -47,14 +47,10 @@ function App() {
       <Navbar />
       <ToastContainer position="bottom-right" theme="dark" autoClose={2000} />
       <AnimatePresence mode="wait">
-        <Switch location={location} key={location.pathname}>
-          <Route exact path="/">
-            <BuyPage />
-          </Route>
-          <Route exact path="/cart">
-            <Cart />
-          </Route>
-        </Switch>
+        <Routes location={location} key={location.key}>
+          <Route path="/" element={<BuyPage />} />
+          <Route path="/cart" element={<Cart />} />
+        </Routes>
       </AnimatePresence>
     </>
   );
