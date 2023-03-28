@@ -14,6 +14,7 @@ export const fetchData = createAsyncThunk("product/data", async () => {
     headers: {
       Authorization: process.env.REACT_APP_API_KEY,
     },
+    baseURL: "",
   });
   return data.photos;
 });
