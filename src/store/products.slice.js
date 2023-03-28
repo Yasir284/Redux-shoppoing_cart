@@ -23,7 +23,7 @@ const productSlice = createSlice({
   initialState: [],
   extraReducers: (builder) => {
     builder.addCase(fetchData.fulfilled, (state, action) => {
-      return action.payload.map((photo) => {
+      return action?.payload?.map((photo) => {
         return {
           id: randUuid(),
           smallImage: photo?.src?.medium,
